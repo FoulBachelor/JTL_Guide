@@ -9,17 +9,24 @@
 *** Live Search
 
     - Change Product Image to variant best matching query.
-    - Changed Product Name to variant best matching query.
+    - Changed Product Name to variant best matching query ?
 
 *** Search Page
 
     - Change Product Image to variant best matching query.
-    - Changed Product Name to variant best matching query.
+    - Changed Product Name to variant best matching query ?
     - Change Product Image to variant best matching facet selection.
-    - Change Product Name to variant best matching product selection.
+    - Change Product Name to variant best matching product selection ?
 
 *** Feed
 
     - Provide Variant names array.
     - Provide Variant Images array.
-    - Provide Variant Keyswords array.
+    - Provide Variant Keyswords/Synonyms array.
+
+*** Expected behaviour with example
+
+    You should expect that the image for a product in the live search is changed to match keywords provided per variant. This could be done with any string attribute list.
+    It has the caveat of not doing a fuzzy match, however it also allows you wider control of when to change variant images since you can directly address this by changing data in the list.
+
+    When providing a data attribute for which attributes to change picture for based on facet selection, it will overwrite the image selection based on the query, and instead use the variant value from the selected facet.

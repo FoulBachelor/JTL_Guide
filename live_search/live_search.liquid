@@ -35,8 +35,7 @@
                     {% assign variant_synonyms = variant_synonyms + '|' %}
                 {% endif %}
 
-                {% if loAs we talked about during the alignment meeting, we have made some design streamlining to My Clerk. It would be awesome if you could test some things out on staging 1 (https://staging1-my.clerk.io/)
-                op.index0 < lim %}
+                {% if loop.index0 < lim %}
                 <a class="clerk_instant_search_link" href="{{ product.url }}">
                     <div class="clerk_instant_search_product" data-variant-synonyms="{{ variant_synonyms }}" data-variant-images="{{ variant_images }}">
                     <img class="clerk_instant_search_product_image" src="{{ product.image }}" />
