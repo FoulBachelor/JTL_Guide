@@ -1,0 +1,25 @@
+* Clerk.io Design Document
+
+** Showing Best variant from Master product
+
+*** General
+
+    - Behaviour is only for showing avaiable variants, in order to drive engagement with purchasable options.
+
+*** Live Search
+
+    - Change Product Image to variant best matching query.
+    - Changed Product Name to variant best matching query.
+
+*** Search Page
+
+    - Change Product Image to variant best matching query.
+    - Changed Product Name to variant best matching query.
+    - Change Product Image to variant best matching facet selection.
+    - Change Product Name to variant best matching product selection.
+
+*** Feed
+
+    - Provide Variant names array.
+    - Provide Variant Images array.
+    - Provide Variant Keyswords array.

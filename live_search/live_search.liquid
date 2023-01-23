@@ -1,0 +1,110 @@
+<div class="clerk_instant_search_wrapper">
+    {% assign lim = products.length %}
+    % if is_mobile or is_tablet %}
+    {% assign lim = lim - 1 %}
+    {% endif %}
+    {% if (products.length + categories.length + pages.length) == 0 %}
+        <div class="clerk_instant_search_noresults">
+            Nothing matched:
+            <b>{{ query }}</b>... try a simpler search!
+        </div>
+    {% endif %}
+    {% comment %}
+        {% if content.query != response.query %}
+            <div class="clerk_instant_search_heading">
+                Showing results for: <b>{{ query }}</b>
+            </div>
+        {% endif %}
+    {% endcomment %}
+    {% assign currency_symbol = '€' %}
+    <div class="clerk_instant_search_grid_wrapper">
+        {% if products.length > 0 %}
+        <div class="clerk_instant_search_column">
+            <div class="clerk_instant_search_title">Products</div>
+            <!-- Below you can change the class "grid" for "list" if you wish to see a list view instead -->
+            <div class="clerk_instant_search_products grid">
+            {% for product in products %}
+
+                {% assign variant_images = '' %}
+                {% if product.variant_images %}
+                    {% assign variant_images = variant_images + '|' %}
+                {% endif %}
+
+                {% assign variant_synonyms = '' %}
+                {% if product.variant_synonyms %}
+                    {% assign variant_synonyms = variant_synonyms + '|' %}
+                {% endif %}
+
+                {% if loAs we talked about during the alignment meeting, we have made some design streamlining to My Clerk. It would be awesome if you could test some things out on staging 1 (https://staging1-my.clerk.io/)
+                op.index0 < lim %}
+                <a class="clerk_instant_search_link" href="{{ product.url }}">
+                    <div class="clerk_instant_search_product" data-variant-synonyms="{{ variant_synonyms }}" data-variant-images="{{ variant_images }}">
+                    <img class="clerk_instant_search_product_image" src="{{ product.image }}" />
+                    <div class="clerk_instant_search_info_wrap">
+                        <p class="clerk_instant_search_product_name">{{ product.name | highlight query }}</p>
+                        <div class="clerk_instant_search_product_price_wrap">
+                        {% if product.price < product.list_price %}
+                            <div class="clerk_instant_search_product_price now">{{ currency_symbol }}{{ product.price | money }}</div>
+                            <div class="clerk_instant_search_product_price before">{{ currency_symbol }}{{ product.list_price | money }}</div>
+                        {% else %}
+                            <div class="clerk_instant_search_product_price now">{{ currency_symbol }}{{ product.price | money }}</div>
+                        {% endif %}
+                        </div>
+                    </div>
+                    <div class="clerk_instant_search_product_cta">View</div>
+                    </div>
+                </a>
+                {% endif %}
+            {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+        {% if (suggestions.length + categories.length + pages.length) > 1 %}
+        <div class="clerk_instant_search_column thin">
+            {% if suggestions.length > 1 %}
+            <div class="clerk_instant_search_suggestions_wrap">
+                <div class="clerk_instant_search_title">Search Suggestions</div>
+                {% for suggestion in suggestions %}
+                {% if suggestion != query %}
+                    <div class="clerk_instant_search_item">
+                    <a class="clerk_instant_search_link" href="/{{ suggestion }}">
+                        {{ suggestion | highlight query 'bold' true }}
+                    </a>
+                    </div>
+                {% endif %}
+                {% endfor %}
+            </div>
+            {% endif %}
+            {% if categories.length > 0 %}
+            <div class="clerk_instant_search_categories_wrap">
+                <div class="clerk_instant_search_title">Categories</div>
+                {% for category in categories %}
+                <div class="clerk_instant_search_item">
+                    <a class="clerk_instant_search_link" href="{{ category.url }}">
+                    {{ category.name | highlight query }}
+                    </a>
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+            {% if pages.length > 0 %}
+            <div class="clerk_instant_search_pages_wrap">
+                <div class="clerk_instant_search_title">Related Content</div>
+                {% for page in pages %}
+                <div class="clerk_instant_search_item">
+                    <a class="clerk_instant_search_link" href="{{ page.url }}">
+                    {{ page.title | highlight query 'bold' true }}
+                    </a>
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+        {% endif %}
+    </div>
+    {% if hits > products.length %}
+        <a class="clerk_instant_search_load_more_btn" href="/?q={{ query }}">
+        See {{ hits }} more results for '{{ query }}'
+        </a>
+    {% endif %}
+</div>
